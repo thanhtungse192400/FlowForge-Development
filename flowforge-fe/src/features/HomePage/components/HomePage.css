@@ -1,0 +1,98 @@
+/* ========================================================================
+   FlowForge HomePage — Global Design System & Parallax Foundation
+   ======================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+/* --- Design Tokens --- */
+:root {
+  /* Backgrounds */
+  --ff-bg-void: #050507;
+  --ff-bg-deep: #0a0a12;
+  --ff-bg-surface: #111119;
+  --ff-bg-elevated: #1a1a25;
+
+  /* Accent colors */
+  --ff-indigo: #6366f1;
+  --ff-purple: #a855f7;
+  --ff-pink: #ec4899;
+  --ff-cyan: #06b6d4;
+  --ff-blue: #3b82f6;
+  --ff-amber: #f59e0b;
+  --ff-emerald: #10b981;
+
+  /* Gradients */
+  --ff-gradient-primary: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  --ff-gradient-secondary: linear-gradient(135deg, #06b6d4, #3b82f6);
+
+  /* Text */
+  --ff-text-primary: #f1f5f9;
+  --ff-text-secondary: #94a3b8;
+  --ff-text-muted: #475569;
+
+  /* Glass */
+  --ff-glass-bg: rgba(255, 255, 255, 0.03);
+  --ff-glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Transitions */
+  --ff-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ff-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--ff-bg-void);
+  color: var(--ff-text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Remove default scrollbar styling for a cleaner look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ff-bg-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* --- Page Wrapper --- */
+.home-page-wrapper {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+}
+
+.home-page-container {
+  width: 100%;
+}
+
+/* --- Smooth Scroll --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Selection Styling --- */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #ffffff;
+}

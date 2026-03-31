@@ -1,0 +1,48 @@
+.section-title-wrapper {
+  margin-bottom: 4rem;
+}
+
+.section-title-wrapper.align-center {
+  text-align: center;
+}
+
+.section-title-wrapper.align-left {
+  text-align: left;
+}
+
+.section-badge {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.1);
+  color: #818CF8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary, #9FA3AD);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.align-left .section-subtitle {
+  margin: 0;
+}
