@@ -1,0 +1,68 @@
+/* ==================== INTRO PAGE ==================== */
+
+/* Full-screen overlay with cream background */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: #f6f5f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Separate solid layer for the loading icon (no blend mode applied) */
+.intro-overlay-solid {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Black text becomes transparent window via lighten blend */
+.premium-mix-blend {
+  mix-blend-mode: lighten; 
+}
+
+/* Horizontal layout for icon + text */
+.intro-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+}
+
+/* Loading icon container */
+.intro-icon-wrapper {
+  width: 4vw;
+  height: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG circle rotated so progress starts from 12 o'clock */
+.intro-loading-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+/* Main intro text */
+.intro-zoomin-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 5vw;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
+  color: #000000;
+  letter-spacing: -0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

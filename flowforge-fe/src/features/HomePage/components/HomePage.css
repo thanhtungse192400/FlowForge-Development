@@ -1,98 +1,138 @@
-/* ========================================================================
-   FlowForge HomePage — Global Design System & Parallax Foundation
-   ======================================================================== */
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
-
-/* --- Design Tokens --- */
-:root {
-  /* Backgrounds */
-  --ff-bg-void: #050507;
-  --ff-bg-deep: #0a0a12;
-  --ff-bg-surface: #111119;
-  --ff-bg-elevated: #1a1a25;
-
-  /* Accent colors */
-  --ff-indigo: #6366f1;
-  --ff-purple: #a855f7;
-  --ff-pink: #ec4899;
-  --ff-cyan: #06b6d4;
-  --ff-blue: #3b82f6;
-  --ff-amber: #f59e0b;
-  --ff-emerald: #10b981;
-
-  /* Gradients */
-  --ff-gradient-primary: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-  --ff-gradient-secondary: linear-gradient(135deg, #06b6d4, #3b82f6);
-
-  /* Text */
-  --ff-text-primary: #f1f5f9;
-  --ff-text-secondary: #94a3b8;
-  --ff-text-muted: #475569;
-
-  /* Glass */
-  --ff-glass-bg: rgba(255, 255, 255, 0.03);
-  --ff-glass-border: rgba(255, 255, 255, 0.06);
-
-  /* Transitions */
-  --ff-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --ff-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+/* ================== CORE VARIABLES & RESETS ================== */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: none; /* Hide default cursor */
+  background-color: #f6f5f1; /* Premium off-white/cream */
 }
 
-/* --- Reset & Base --- */
-*,
-*::before,
-*::after {
+.fluid-wrapper {
+  background-color: #f6f5f1;
+  color: #111111;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: clip; 
+  margin: 0;
+  padding: 0;
+  cursor: none;
+}
+
+/* Typography Base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+a, button {
+  cursor: none; /* Overriding default pointer to let custom cursor work */
+}
+
+.fluid-section {
+  width: 100vw;
+  position: relative;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--ff-bg-void);
-  color: var(--ff-text-primary);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+/* Custom Cursor Tracker */
+.premium-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Keep stroke white, difference will make it black */
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Remove default scrollbar styling for a cleaner look */
-::-webkit-scrollbar {
-  width: 6px;
+.premium-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #fff; /* Keep white for difference mode inversion */
+  pointer-events: none;
+  z-index: 10000;
+  margin: 14px; 
+  mix-blend-mode: difference;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--ff-bg-void);
+/* Utils Layout của HomePage */
+.h-screen { min-height: 100vh; }
+.h-150 { height: 150vh; }
+.flex-center { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column; 
 }
-
-::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.3);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.5);
-}
-
-/* --- Page Wrapper --- */
-.home-page-wrapper {
-  width: 100%;
+.relative-z-index {
   position: relative;
-  min-height: 100vh;
+  z-index: 10;
 }
 
-.home-page-container {
+/* ================== HEADER NAV ================== */
+.fluid-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 4rem;
+  z-index: 100;
+  mix-blend-mode: difference;
+  box-sizing: border-box;
 }
 
-/* --- Smooth Scroll --- */
-html {
-  scroll-behavior: smooth;
+.brand-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-/* --- Selection Styling --- */
-::selection {
-  background: rgba(99, 102, 241, 0.3);
-  color: #ffffff;
+.fluid-header-right {
+  display: flex;
+  gap: 3rem;
+}
+
+.fluid-header-right a {
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.4s ease;
+}
+
+.fluid-header-right a:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .fluid-header {
+    padding: 1.5rem 2rem;
+  }
+  .fluid-header-right {
+    display: none; 
+  }
 }
