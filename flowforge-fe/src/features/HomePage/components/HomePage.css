@@ -5,7 +5,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  cursor: none; /* Hide default cursor */
+
   background-color: #f6f5f1; /* Premium off-white/cream */
 }
 
@@ -16,7 +16,7 @@ body {
   overflow-x: clip; 
   margin: 0;
   padding: 0;
-  cursor: none;
+
 }
 
 /* Typography Base */
@@ -25,10 +25,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   margin: 0;
   letter-spacing: -0.02em;
-}
-
-a, button {
-  cursor: none; /* Overriding default pointer to let custom cursor work */
 }
 
 .fluid-section {
