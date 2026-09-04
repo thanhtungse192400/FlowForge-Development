@@ -36,40 +36,6 @@ export default function HomePage() {
         <Chapter3 />
       </main>
 
-      {/* Floating Header Navigation */}
-      <nav className="fluid-header">
-
-        <div className="fluid-header-left">
-          <Link
-            to="/"
-            className="brand-logo"
-          >
-            CHRONOS
-          </Link>
-        </div>
-
-        <div className="fluid-header-right">
-
-          <Link to="/Collection">
-            Collection
-          </Link>
-
-          <Link to="/Philosophy">
-            Philosophy
-          </Link>
-
-          <Link to="/Boutiques">
-            Boutiques
-          </Link>
-
-          <Link to="/Cart">
-            Cart (0)
-          </Link>
-
-        </div>
-
-      </nav>
-
     </div>
   );
 }
