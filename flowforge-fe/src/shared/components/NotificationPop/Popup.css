@@ -1,0 +1,8 @@
+.popup-overlay {
+  position: fixed; top: 20px; right: 20px; z-index: 9999;
+  padding: 15px 25px; border-radius: 8px; color: white;
+  animation: slideIn 0.3s ease-out;
+}
+.popup-overlay.success { background-color: #36b37e; }
+.popup-overlay.error { background-color: #ff5630; }
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }

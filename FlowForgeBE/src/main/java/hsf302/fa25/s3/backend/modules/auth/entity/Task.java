@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Task extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String title;
@@ -25,11 +26,15 @@ public class Task extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
     @ManyToOne(fetch = FetchType.LAZY)
     private User assignedTo;
 
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TaskComment> comments;
 
+    
 }

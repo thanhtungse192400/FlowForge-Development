@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import javax.management.relation.Role;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,11 +23,27 @@ public class User extends BaseEntity {
 
 
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
     private String password;
     private String phone;
     @Enumerated(EnumType.STRING)
     private RoleStatus role;
+    private String avatarUrl;
+
+    private String FullName;
+
+
+    @OneToMany(mappedBy = "createdBy")
+    private List<Task> createdTasks;
+
+    @OneToMany(mappedBy = "assignedTo")
+    private List<Task> assignedTasks;
+
+    @OneToMany(mappedBy = "user")
+    private List<ProjectMember> projectMembers;
 
 
 }

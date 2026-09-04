@@ -1,0 +1,214 @@
+/* ================== PROFILE PAGE STYLES ================== */
+.profile-page {
+    padding: 80px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 900px;
+    background-color: transparent; /* Tôn trọng màu nền tổng thể #f6f5f1 */
+}
+
+/* Header */
+.profile-header {
+    margin-bottom: 50px;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+    padding-bottom: 20px;
+}
+
+.profile-header h2 {
+    font-size: 2.5rem;
+    color: #111111;
+    margin-bottom: 10px;
+}
+
+.profile-header p {
+    font-size: 0.95rem;
+    color: #555555;
+    margin: 0;
+}
+
+/* Layout 2 cột */
+.profile-content {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* --- Cột Trái: Avatar --- */
+.profile-avatar-section {
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #e5e4e0; /* Tối hơn nền 1 chút để tạo khối */
+    margin-bottom: 20px;
+    border: 1px solid rgba(17, 17, 17, 0.05);
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    color: #111111;
+}
+
+.avatar-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(17, 17, 17, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f6f5f1;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.avatar-wrapper:hover .avatar-overlay {
+    opacity: 1;
+}
+
+.avatar-hint {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0;
+}
+
+/* --- Cột Phải: Form --- */
+.profile-form-section {
+    flex: 1;
+}
+
+.premium-form .form-group {
+    margin-bottom: 30px;
+}
+
+.premium-form label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.premium-form input {
+    width: 100%;
+    padding: 12px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #111111;
+    transition: border-color 0.3s ease;
+}
+
+.premium-form input:focus {
+    outline: none;
+    border-bottom: 1px solid #111111;
+}
+
+.premium-form input::placeholder {
+    color: #aaa;
+}
+.profile-back-link{
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #111111;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+.profile-back-link:hover {
+    color: #333333;
+}
+/* Nút bấm Premium */
+.premium-btn {
+    margin-top: 20px;
+    background-color: #111111;
+    color: #f6f5f1;
+    border: none;
+    padding: 14px 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.premium-btn:hover:not(:disabled) {
+    background-color: #333333;
+}
+
+.premium-btn:disabled {
+    background-color: #777;
+    cursor: not-allowed;
+}
+
+/* Thông báo & Trạng thái */
+.success-message {
+    color: #2e7d32;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Loader tinh tế */
+.premium-loader {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(17, 17, 17, 0.1);
+    border-top-color: #111111;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive: Gộp thành 1 cột trên Mobile */
+@media (max-width: 768px) {
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    
+    .profile-form-section {
+        width: 100%;
+    }
+}

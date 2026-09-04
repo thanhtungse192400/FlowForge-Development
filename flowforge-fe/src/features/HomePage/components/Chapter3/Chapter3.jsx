@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import AnimatedText from '../AnimatedText';
 import './Chapter3.css';
 
@@ -81,12 +82,13 @@ export default function Chapter3() {
             transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
             viewport={{ once: false }}
           >
-            <h2 className="footer-contact hover-target">RESERVE</h2>
+            <h2 className="footer-contact hover-target">FLOWFORGE</h2>
           </motion.div>
           <div className="footer-links">
             <a href="#" className="hover-target">Boutique</a>
             <a href="#" className="hover-target">Concierge</a>
             <a href="#" className="hover-target">Instagram</a>
+            <Link to="https://www.facebook.com/tung.tran.327263" className="hover-target">Facebook</Link>
           </div>
         </div>
       </footer>

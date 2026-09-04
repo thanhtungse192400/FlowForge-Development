@@ -14,15 +14,22 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"project_id", "user_id"})
+        }
+)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectMember extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(name = "id")
+    private UUID projectMemberId;
 
     @ManyToOne
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
 
     @ManyToOne

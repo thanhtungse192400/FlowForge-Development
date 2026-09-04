@@ -19,36 +19,38 @@ public class AuthController {
 
     @PostMapping("/register")
     public ApiResponse<?> register(@RequestBody RegisterRequest request) {
-        return authService.register(request);
+        authService.register(request);
+        return ApiResponse.success("Register success", null);
     }
 
     @PostMapping("/login")
     public ApiResponse<AuthResponse> login(@RequestBody LoginRequest request,
                                            HttpServletRequest httpRequest) {
 
-        return authService.login(
+        AuthResponse response = authService.login(
                 request,
                 httpRequest.getHeader("Device-Name"),
                 httpRequest.getRemoteAddr(),
                 httpRequest.getHeader("User-Agent")
         );
+        return ApiResponse.success("Login success", response);
     }
 
     @PostMapping("/refresh")
-    public ApiResponse<?> refresh(
+    public ApiResponse<AuthResponse> refresh(
             @RequestBody RefreshTokenRequest request
     ) {
 
-        return authService.refresh(request.getRefreshToken());
+        AuthResponse response = authService.refresh(request.getRefreshToken());
+        return ApiResponse.success("Token refreshed", response);
     }
 
     @PostMapping("/logout")
-    public String logout(
+    public ApiResponse<?> logout(
             @RequestBody RefreshTokenRequest request
     ) {
 
         authService.logout(request.getRefreshToken());
-
-        return "Logout success";
+        return ApiResponse.success("Logout success", null);
     }
 }

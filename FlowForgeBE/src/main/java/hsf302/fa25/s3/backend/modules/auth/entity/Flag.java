@@ -12,7 +12,8 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-public class Like extends BaseEntity {
+
+public class Flag extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -20,6 +21,7 @@ public class Like extends BaseEntity {
     private  String username;
     @Column(columnDefinition = "TEXT")
     private String action;
+
 
     private String amounts;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,59 +1,82 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../../features/auth';
+import authService from '../../../features/auth/services/authService';
 import './Header.css';
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const { user, logout } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  console.log(user);
+  
 
-  // Thêm background/shadow khi scroll xuống
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+    } catch (e) {
+      console.error('Logout failed:', e);
+    } finally {
+      logout();
+      setIsMenuOpen(false);
+      navigate('/');
+    }
+  };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  return (
+    <nav className="fluid-header">
+      <div className="fluid-header-left">
+        <Link to="/" className="brand-logo">
+          CHRONOS
+        </Link>
+      </div>
 
-  return (
-    <header className={`global-header ${scrolled ? 'scrolled' : ''}`}>
-      {/* Brand / Logo */}
-      <a href="/" className="header-logo">
-        <div className="logo-icon">
-          <div className="logo-inner"></div>
-        </div>
-        <div className="logo-text">
-          Flow<span className="logo-text-accent">Forge</span>
-        </div>
-      </a>
-
-      {/* Navigation */}
-      <nav className="header-nav">
-        <a href="#features" className="nav-link">Features</a>
-        <a href="#solutions" className="nav-link">Solutions</a>
-        <a href="#developers" className="nav-link">Developers</a>
-        <a href="#pricing" className="nav-link">Pricing</a>
-      </nav>
-
-      {/* Actions */}
-      <div className="header-actions">
-        <button className="btn-login">Log In</button>
-        <button className="btn-get-started">
-          <span>Get Started Free</span>
-        </button>
-      </div>
-
-      {/* Mobile Toggle */}
-      <button className="mobile-menu-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
-    </header>
-  );
+      <div className="fluid-header-right">
+        <div className="nav-container-wrapper">
+          <AnimatePresence>
+            {!isMenuOpen && (
+              <motion.div
+                key="header-nav"
+                className="nav-links-container"
+                initial={{ opacity: 0, x: 20, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, x: 50, filter: 'blur(4px)', width: 0, overflow: 'hidden' }}
+                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+              >
+                {!user ? (
+                  <>
+                    <Link to="/Workspace">Workspace</Link>
+                    
+                  </>
+                ) : (
+                  <>
+                  <span className="welcome-text"></span>
+                    <Link to="/Workspace">Workspace</Link>
+                    <Link to="/#">Donate Money pls </Link>
+                    <Link to="/profile">Profile</Link>
+                    <button className="nav-logout-btn" onClick={handleLogout}>Sign Out</button>
+                  </>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          
+          {!user ? (
+            <Link to="/login" className="nav-auth-link">Login</Link>
+          ) : (
+            <div className="user-menu-container">
+              <button 
+                className={`user-avatar-header ${isMenuOpen ? 'avatar-active' : ''}`}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                title={user.name || user.email}
+              >
+                {user.name ? user.name.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U')}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
 }

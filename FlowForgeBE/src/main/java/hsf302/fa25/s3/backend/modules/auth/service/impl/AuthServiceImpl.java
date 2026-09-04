@@ -3,7 +3,6 @@ package hsf302.fa25.s3.backend.modules.auth.service.impl;
 import hsf302.fa25.s3.backend.infrastructure.jwt.JwtService.JwtService;
 import hsf302.fa25.s3.backend.modules.auth.dto.request.LoginRequest;
 import hsf302.fa25.s3.backend.modules.auth.dto.request.RegisterRequest;
-import hsf302.fa25.s3.backend.modules.auth.dto.response.ApiResponse;
 import hsf302.fa25.s3.backend.modules.auth.dto.response.AuthResponse;
 import hsf302.fa25.s3.backend.modules.auth.entity.DeviceSession;
 import hsf302.fa25.s3.backend.modules.auth.entity.User;
@@ -30,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
     @Override
-    public ApiResponse<?> register(RegisterRequest req) {
+    public void register(RegisterRequest req) {
 
         if (userRepository.findByEmail(req.email).isPresent()) {
             throw new AuthException(AuthError.EMAIL_EXISTS);
@@ -38,6 +37,7 @@ public class AuthServiceImpl implements AuthService {
 
         User user = User.builder()
                 .name(req.name)
+                .FullName(req.fullName)
                 .email(req.email)
                 .password(passwordEncoder.encode(req.password))
                 .phone(req.phone)
@@ -45,12 +45,10 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         userRepository.save(user);
-
-        return ApiResponse.success("Register success", null);
     }
 
     @Override
-    public ApiResponse<AuthResponse> login(LoginRequest req,
+    public AuthResponse login(LoginRequest req,
                                            String deviceName,
                                            String ipAddress,
                                            String userAgent) {
@@ -77,14 +75,18 @@ public class AuthServiceImpl implements AuthService {
 
         sessionRepository.save(session);
 
-        return ApiResponse.success(
-                "Login success",
-                new AuthResponse(accessToken, refreshToken)
-        );
+        AuthResponse response = AuthResponse.builder()
+                .userId(user.getId())
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .role(user.getRole())
+                .build();
+
+        return response;
     }
 
     @Override
-    public ApiResponse<?> refresh(String refreshToken) {
+    public AuthResponse refresh(String refreshToken) {
 
         DeviceSession session = sessionRepository.findByRefreshToken(refreshToken)
                 .orElseThrow(() -> new AuthException(AuthError.INVALID_REFRESH_TOKEN));
@@ -102,19 +104,23 @@ public class AuthServiceImpl implements AuthService {
 
         String newAccessToken = jwtService.generateAccessToken(user);
 
-        return ApiResponse.success("Token refreshed",
-                new AuthResponse(newAccessToken, refreshToken));
+        AuthResponse response = AuthResponse.builder()
+                .userId(user.getId())
+                .accessToken(newAccessToken)
+                .refreshToken(refreshToken)
+                .role(user.getRole())
+                .build();
+
+        return response;
     }
 
     @Override
-    public ApiResponse<?> logout(String refreshToken) {
+    public void logout(String refreshToken) {
 
         DeviceSession session = sessionRepository.findByRefreshToken(refreshToken)
                 .orElseThrow(() -> new AuthException(AuthError.INVALID_REFRESH_TOKEN));
 
         session.setRevoked(true);
         sessionRepository.save(session);
-
-        return ApiResponse.success("Logout success", null);
     }
 }
